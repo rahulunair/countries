@@ -80,6 +80,23 @@ impl Country {
             top_level_domain,
         }
     }
+
+    fn print(&self) {
+        let line = "=".repeat(40);
+        println!("{}", line);
+        println!("code :: {}", self.alpha_3_code);
+        println!("name :: {}", self.name);
+        println!("native name :: {}", self.native_name);
+        println!("capital :: {}", self.capital);
+        println!("population :: {}", self.population);
+        println!("area :: {}", self.area);
+        println!("boders :: {}", self.borders);
+        println!("region :: {}", self.region);
+        println!("demonym :: {}", self.demonym);
+        println!("domain :: {}", self.top_level_domain);
+        println!("flag :: {}", self.flag);
+        println!("{}", line);
+    }
 }
 impl Client {
     fn default(args: Args) -> Self {
@@ -87,6 +104,7 @@ impl Client {
     }
 
     fn get(&self, full_name: &String) -> Result<()> {
+        println!("fetching country details...");
         let url = format!("{}/name/{}", BASE_URL, full_name);
         let res = reqwest::blocking::get(&url)
             .unwrap()
@@ -114,7 +132,7 @@ impl Client {
             json["flag"].as_str().unwrap().to_string(),
             json["topLevelDomain"].to_string(),
         );
-        println!("{:#?}", country);
+        country.print();
         Ok(())
     }
 }
@@ -123,7 +141,7 @@ fn main() {
     let args = Args::parse();
     let client = Client::default(args);
     match client.get(&client.args.country) {
-        Ok(()) => println!(""),
+        Ok(()) => (),
         Err(err) => println!("{:?}", err),
     }
 }
