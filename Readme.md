@@ -19,3 +19,9 @@ domain :: [".in"]
 flag :: https://restcountries.eu/data/ind.svg
 ========================================
 ```
+
+## TODO
+- fix ugly unwrap
+- take list of countries, process async
+- score countries based on pop density, show list
+
