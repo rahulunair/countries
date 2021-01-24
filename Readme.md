@@ -24,4 +24,5 @@ flag :: https://restcountries.eu/data/ind.svg
 - fix ugly unwrap
 - take list of countries, process async
 - score countries based on pop density, show list
+- cache using lru
 
