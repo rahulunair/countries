@@ -1,5 +1,5 @@
 use anyhow::Result;
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 use serde_json::Value;
 
 use crate::cli::Args;
@@ -10,22 +10,30 @@ pub struct Client {
     pub args: Args,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Deserialize, Debug)]
 struct Currency {
     code: String,
     name: String,
     symbol: String,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
-struct Languages {
+#[derive(Deserialize, Debug)]
+struct Language {
     iso639_1: String,
     iso639_2: String,
     name: String,
     native_name: String,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Deserialize, Debug)]
+struct RegionalBloc {
+    acronym: String,
+    name: String,
+    other_acronyms: Vec<String>,
+    other_names: Vec<String>,
+}
+
+#[derive(Deserialize, Debug)]
 pub struct Country {
     alpha_2_code: String,
     alpha_3_code: String,
@@ -34,23 +42,28 @@ pub struct Country {
     area: f64,
     borders: String,
     //borders: Vec<String>,
+    calling_codes: String,
+    //calling_codes: Vec<String>,
     capital: String,
     //cioc: String,
     //currencies: Vec<Currency>,
     demonym: String,
     flag: String,
     gini: f64,
-    //languages: Vec<Languages>,
+    //languages: Vec<Language>,
     latlng: String,
     name: String,
     native_name: String,
     //numeric_code: String,
     population: f64,
     region: String,
-    calling_codes: String,
+    //regional_blocs: Vec<RegionalBloc>,
     sub_region: String,
     timezones: String,
+    //timezones: Vec<String>,
     top_level_domain: String,
+    //top_level_domain: Vec<String>,
+    //translations: Vec<Translation>
 }
 
 impl Country {
