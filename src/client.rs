@@ -85,6 +85,7 @@ impl Country {
         println!("capital :: {}", self.capital);
         println!("population :: {}", self.population);
         println!("area :: {}", self.area);
+        println!("population density :: {:.3}", self.population / self.area);
         println!("boders :: {}", self.borders);
         println!("region :: {}", self.region);
         println!("demonym :: {}", self.demonym);
