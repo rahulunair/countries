@@ -103,11 +103,20 @@ impl Client {
         println!("fetching country details...");
         let url = format!("{}/name/{}", BASE_URL, full_name);
         let res = reqwest::blocking::get(&url)
-            .unwrap()
+            .expect("failed to retrive content")
             .text()
-            .expect("text content");
-        let res = res.strip_prefix("[").unwrap().strip_suffix("]").unwrap();
-        let json: Value = serde_json::from_str(res)?;
+            .expect("failed to parse content as text");
+        let res = if res.starts_with("[") {
+            res.strip_prefix("[")
+                .unwrap()
+                .strip_suffix("]")
+                .unwrap()
+                .to_string()
+        } else {
+            res
+        };
+        println!("response stripped: {:?}", &res);
+        let json: Value = serde_json::from_str(&res)?;
         let country = Country::default(
             json["name"].as_str().unwrap().to_string(),
             json["alpha2Code"].as_str().unwrap().to_string(),
