@@ -1,6 +1,5 @@
-//use anyhow::Result;
+use anyhow::Result;
 use serde::{Deserialize, Serialize};
-use serde_json::Result;
 use serde_json::Value;
 
 use crate::cli::Args;
@@ -12,24 +11,45 @@ pub struct Client {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct Country {
+struct Currency {
+    code: String,
     name: String,
+    symbol: String,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+struct Languages {
+    iso639_1: String,
+    iso639_2: String,
+    name: String,
+    native_name: String,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+pub struct Country {
     alpha_2_code: String,
     alpha_3_code: String,
-    calling_codes: String,
-    capital: String,
     alt_spellings: String,
-    region: String,
-    sub_region: String,
-    population: f64,
-    latlng: String,
-    demonym: String,
-    gini: f64,
-    timezones: String,
-    borders: String,
-    native_name: String,
+    //alt_spellings: Vec<String>,
     area: f64,
+    borders: String,
+    //borders: Vec<String>,
+    capital: String,
+    //cioc: String,
+    //currencies: Vec<Currency>,
+    demonym: String,
     flag: String,
+    gini: f64,
+    //languages: Vec<Languages>,
+    latlng: String,
+    name: String,
+    native_name: String,
+    //numeric_code: String,
+    population: f64,
+    region: String,
+    calling_codes: String,
+    sub_region: String,
+    timezones: String,
     top_level_domain: String,
 }
 
